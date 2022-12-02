@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<!--<TargetFramework>net48</TargetFramework>-->
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>nilnul.lang_.cot</RootNamespace>
+		<Description>commented text such as "a(ab(c(as))())d" or "ab(asd(d)as" as a lang. </Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Configurations>Debug;Release;Symbol</Configurations>
+		<Version>1.1</Version>
+		<!--<AssemblyVersion>1.0.8888.0</AssemblyVersion>-->
+	</PropertyGroup>
+
+	<PropertyGroup>
+	</PropertyGroup>
+	<PropertyGroup>
+
+		<AssemblyOriginatorKeyFile>t.snk</AssemblyOriginatorKeyFile>
+		<SignAssembly>true</SignAssembly>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Symbol' OR '$(Configuration)'=='Dev2nuget'">True</GeneratePackageOnBuild>
+		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<nilnulPattern4majorMinor>^([^\.]+)\.([^\.]+)$</nilnulPattern4majorMinor>
+		<nilnulMajorMinor>$([System.Text.RegularExpressions.Regex]::Match($(Version), $(nilnulPattern4majorMinor)))</nilnulMajorMinor>
+	</PropertyGroup>
+	<PropertyGroup>
+		<nilnulTime>$([System.DateTime]::UtcNow.ToString("yyMMddHHmmss"))</nilnulTime>
+		<nilnulPattern4date>^.{6}</nilnulPattern4date>
+		<nilnulDate>$([System.Text.RegularExpressions.Regex]::Match($(nilnulTime), $(nilnulPattern4date)))</nilnulDate>
+		<nilnulPattern4clock>.{6}$</nilnulPattern4clock>
+		<nilnulClock>$([System.Text.RegularExpressions.Regex]::Match($(nilnulTime), $(nilnulPattern4clock)))</nilnulClock>
+		<nilnulClockCollapsed>$(nilnulClock.TrimStart('0'))</nilnulClockCollapsed>
+		<_nilnulClockPrefixed>.$(nilnulClockCollapsed)</_nilnulClockPrefixed>
+		<nilnulClockPrefixed>$(_nilnulClockPrefixed.TrimEnd('.'))</nilnulClockPrefixed>
+		<nilnulPatchRevision>$(nilnulDate)$(nilnulClockPrefixed)</nilnulPatchRevision>
+	</PropertyGroup>
+	<PropertyGroup>
+		<!--<PackageVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmmss"))</PackageVersion>-->
+		<PackageVersion>$(nilnulMajorMinor)$(nilnulPatchRevision)</PackageVersion>
+
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="nilnul0\lang_\cot\_tex\symbol_\OverallX.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="t.snk" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="nilnul0\lang_\cot\_tex\symbol_\overall\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="nilnul._txt_._LIB_" Version="1.1.220908.84230" />
+	</ItemGroup>
+
+	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="echo After Build: $(OutDir)" />
+	</Target>-->
+	<!--<Target Name="CopyPackage" AfterTargets="Pack">
+		<Copy       SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"                 DestinationFolder="$(SolutionDir)NuGet\BuildOut\"         />
+	</Target>-->
+	<Target Name="PushPackage" AfterTargets="Pack" Condition="'$(Configuration)'=='Symbol' OR '$(Configuration)'=='Dev2nuget'">
+		<PropertyGroup>
+			<Cmd>"$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"</Cmd>
+		</PropertyGroup>
+		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source local" />
+		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source my" />
+	</Target>
+</Project>
