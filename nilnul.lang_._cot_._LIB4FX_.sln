@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nilnul.lang_._cot_._LIB4FX_", "nilnul.lang_._cot_._LIB4FX_.csproj", "{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Sym2nuget|Any CPU = Sym2nuget|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Sym2nuget|Any CPU.ActiveCfg = Sym2nuget|Any CPU
+		{8DD21B30-4ED1-407D-8685-85AE9B27DB6F}.Sym2nuget|Any CPU.Build.0 = Sym2nuget|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1FFF9C22-321A-41C5-97A8-831976E833F8}
+	EndGlobalSection
+EndGlobal

@@ -9,6 +9,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Sym2nuget|Any CPU = Sym2nuget|Any CPU
 		Symbol|Any CPU = Symbol|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -16,6 +17,8 @@ Global
 		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Sym2nuget|Any CPU.ActiveCfg = Sym2nuget|Any CPU
+		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Sym2nuget|Any CPU.Build.0 = Sym2nuget|Any CPU
 		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Symbol|Any CPU.ActiveCfg = Symbol|Any CPU
 		{EAD275B2-572B-4819-93EE-47D9E9A7EF23}.Symbol|Any CPU.Build.0 = Symbol|Any CPU
 	EndGlobalSection

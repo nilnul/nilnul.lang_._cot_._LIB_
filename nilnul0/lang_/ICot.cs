@@ -18,12 +18,16 @@ namespace nilnul.lang_
 
 	/// nilnul.lang_.bit is subtyping this;
 	/// nilnul.lang_.cognom is extension of this;
-	
-	///
+
+	/// unlike <see cref="nilnul.txt.ILex"/> which can only make rules for a word, and cannot describe paired parenthesis for tree structures. word is linear, and nested is the lang, which is the basic example that is beyond the lex can describe;
 	/// <summary>
-	/// commented text
+	/// commented text, nested;
 	/// </summary>
 	/// <remarks>
+	/// lineate a tree.
+	/// eg:
+	///		(Buffalo buffalo) ((Buffalo buffalo) buffolo) buffalo (Buffalo buffalo) would be easier to understand than a syntax tree.
+	///			,where subexpression is a tree relation.
 	/// eg:
 	///		"", the empty str
 	///		()
@@ -37,6 +41,7 @@ namespace nilnul.lang_
 	///		1+2*(3+5)
 	///	nilnul.lang_.bit is a subtype of this; As there is only nary/unary/binary op, we imagine inserting some invisible parenthesis.
 	/// </remarks>
+	/// 
 	/// alias:
 	///		cot:
 	///			commented text
@@ -44,7 +49,9 @@ namespace nilnul.lang_
 	///			sounds like "quote"
 	///			compart
 	///				closed txt
-    public interface ICot
+	public interface ICot
+		//:
+		//nilnul.lang_.ling_.ICot
     {
     }
 }

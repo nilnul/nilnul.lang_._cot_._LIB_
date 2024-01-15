@@ -6,9 +6,9 @@
 		<RootNamespace>nilnul.lang_.cot</RootNamespace>
 		<Description>commented text such as "a(ab(c(as))())d" or "ab(asd(d)as" as a lang. </Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Configurations>Debug;Release;Symbol</Configurations>
-		<Version>1.1</Version>
-		<!--<AssemblyVersion>1.0.8888.0</AssemblyVersion>-->
+		<Configurations>Debug;Release;Symbol;Sym2nuget</Configurations>
+		<Version>1.2</Version>
+		<AssemblyVersion>1.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -20,6 +20,21 @@
 		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Symbol' OR '$(Configuration)'=='Dev2nuget'">True</GeneratePackageOnBuild>
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="nilnul0\lang_\cot\_tex\symbol_\OverallX.cs" />
+		<Compile Remove="Properties\AssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="t.snk" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="nilnul0\lang_\cot\_tex\symbol_\overall\" />
+		<Folder Include="Properties\" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="nilnul._txt_._LIB_" Version="1.1.230806.55903-sym" />
+	</ItemGroup>
+
 
 	<PropertyGroup>
 		<nilnulPattern4majorMinor>^([^\.]+)\.([^\.]+)$</nilnulPattern4majorMinor>
@@ -38,21 +53,11 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<!--<PackageVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmmss"))</PackageVersion>-->
-		<PackageVersion>$(nilnulMajorMinor)$(nilnulPatchRevision)</PackageVersion>
+		<PackageVersion>$(nilnulMajorMinor).$(nilnulPatchRevision)</PackageVersion>
+		<PackageVersion Condition="'$(Configuration)'=='Sym2nuget'">$(nilnulMajorMinor).$(nilnulPatchRevision)-sym</PackageVersion>
 
+		
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="nilnul0\lang_\cot\_tex\symbol_\OverallX.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="t.snk" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="nilnul0\lang_\cot\_tex\symbol_\overall\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Include="nilnul._txt_._LIB_" Version="1.1.220908.84230" />
-	</ItemGroup>
 
 	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="echo After Build: $(OutDir)" />
@@ -60,11 +65,29 @@
 	<!--<Target Name="CopyPackage" AfterTargets="Pack">
 		<Copy       SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"                 DestinationFolder="$(SolutionDir)NuGet\BuildOut\"         />
 	</Target>-->
-	<Target Name="PushPackage" AfterTargets="Pack" Condition="'$(Configuration)'=='Symbol' OR '$(Configuration)'=='Dev2nuget'">
+
+
+	<Target Name="PushPackage" AfterTargets="Pack" Condition="'$(Configuration)'=='Symbol' OR '$(Configuration)'=='Dev2nuget' OR '$(Configuration)'=='Sym2nuget1'">
 		<PropertyGroup>
 			<Cmd>"$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"</Cmd>
 		</PropertyGroup>
 		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source local" />
 		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source my" />
 	</Target>
+	
+	<Target Name="PushPackage" AfterTargets="Pack" Condition="'$(Configuration)'=='Sym2nuget'">
+		<PropertyGroup>
+			<Cmd>"$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"</Cmd>
+		</PropertyGroup>
+		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source nuget" />
+		<Exec Command="NuGet.exe push $(Cmd) -SkipDuplicate -Source my" />
+		<Exec Command="echo sym2nuget;" />
+		<Message Text="echo sym2nuget from msg;" />
+		
+	</Target>
+	
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="echo postbuild;" />
+	</Target>
+
 </Project>
